@@ -2,13 +2,6 @@ import random
 
 FILL_RATE = 0.55
 
-
-def count_filled(matrix):
-    count = 0.0
-    for row in matrix:
-        count += row.count("1")
-    return count
-
 # Заполняем матрицу нулями
 size = int(input("Введите размер матрицы: "))
 matrix = []
@@ -18,11 +11,13 @@ for i in range(size):
 # print(matrix)
 
 # Добавляем в матрицу единички, пока она не заполнится до определенного уровня
-# ОЧЕНЬ МЕДЛЕННО. На 800 уже валится намертво
-while (count_filled(matrix) / (size * size)) < FILL_RATE:
+filled = 0
+while (filled / (size * size)) < FILL_RATE:
     row = random.randint(0, size - 1)
     col = random.randint(0, size - 1)
-    matrix[row][col] = "1"
+    if matrix[row][col] == "0":
+        matrix[row][col] = "1"
+        filled+=1
 
 # print(matrix)
 
